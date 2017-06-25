@@ -23,7 +23,9 @@ and what you should write is the sayHi function that makes the code above work,
 // 1. Write a function called first that returns the first item of the array using a callback function
 
   // Code Here
-
+function first(arr, func){
+  return func(arr[0]);
+}
   
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 first(names, function(firstName){
@@ -35,6 +37,9 @@ first(names, function(firstName){
 // 2. Write a function called last which returns the last item of the array using a callback function.
 
   //Code Here
+  function last(arr, func){
+    return func(arr[arr.length -1]);
+  }
 
 last(names, function(lastName){
   console.log('The last name in names is ' + lastName);
@@ -45,7 +50,9 @@ last(names, function(lastName){
 // 3. Write a function called multiply that multiplies two numbers using a callback function.
 
   //Code Here
-
+function multiply(num1, num2, func) {
+  return func(num1 * num2);
+}
 
 multiply(4, 3, function(answer){
   console.log('The answer is ' + answer); //should console.log 12
@@ -57,6 +64,13 @@ multiply(4, 3, function(answer){
 // If it does, return true using the callback, if not return false.
 
   //Code Here 
+function contains(arr, str, func) {
+  if (arr.includes(str)) {
+    return func(true);
+  } else {
+    return func(false);
+  }
+}
 
 contains(names, 'Colt', function(result){
   if(result === true){
@@ -72,6 +86,11 @@ contains(names, 'Colt', function(result){
 // the callback function with the array of unique names.
 
     //Code Here
+function uniq(arr, func) {
+  let s = new Set(arr);
+  let it = s.values();
+  return func(Array.from(it));
+}
 
 uniq(names, function(uniqArr){
   console.log('The new names array with all the duplicate items removed is ', uniqArr);
@@ -83,6 +102,12 @@ uniq(names, function(uniqArr){
 
     //Code Here 
 
+function each(arr, func) {
+  for (i=0; i< arr.length; i++) {
+    func(arr[i], i);
+  }
+}
+
 each(names, function(item, indice){
   console.log('The item in the ' + indice + ' position is ' + item)
 });
@@ -93,6 +118,14 @@ each(names, function(item, indice){
 // and returns that user.
 
  //Code Here
+
+function getUserById(obj, id, func) {
+  for (i = 0; i < obj.length; i++) {
+    if (obj[i].id === id) {
+      return func(obj[i]);
+    }
+  }
+}
 
 var users = [
   {
